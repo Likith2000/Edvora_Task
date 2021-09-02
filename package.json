@@ -1,0 +1,26 @@
+{
+  "name": "internship-task",
+  "version": "1.0.0",
+  "description": "Edvora Internship Task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Likith2000/Edvora_Task.git"
+  },
+  "keywords": [
+    "Authentication",
+    "API"
+  ],
+  "author": "Likith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Likith2000/Edvora_Task/issues"
+  },
+  "homepage": "https://github.com/Likith2000/Edvora_Task#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
