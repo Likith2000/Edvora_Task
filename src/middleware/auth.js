@@ -21,6 +21,9 @@ module.exports.userAuth = async (req, res, next) => {
     user.tokens = undefined;
     user.password = undefined;
     req.user = user;
+    req.token = req
+    .header(constants.authorizationHeaderName)
+    .replace(constants.bearerTokenLabel, "");
     next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {

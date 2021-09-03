@@ -96,4 +96,7 @@ User.updateUser = (uid, password) =>
 User.clearTokens = (uid) =>
   User.findOneAndUpdate({ uid: uid }, { tokens: [] }, {new: true}).then((user) => user);
 
+User.clearToken = (uid, accessToken) =>
+  User.updateMany({ uid: uid }, { $pull: { tokens: { accessToken: accessToken} } }, { multi: true }).then((user) => user);
+
 module.exports = User;

@@ -82,3 +82,22 @@ module.exports.changePasswordController = [
     }
   }
 ];
+
+module.exports.logoutController = [
+  async (req, res) => {
+    try {
+      const user = await User.getUserDetails(req.user.uid);
+      if (user == undefined) {
+        throw createPermissionError("400", "User does not exist");
+      }
+      const res_message = await User.clearToken(req.user.uid, req.token);
+      var res_message_1 = "Error!"
+      if (res_message.modifiedCount == 1) {
+         res_message_1 = "Logged Out!"
+      }
+      successResponseWithData(res, res_message_1);
+    } catch (error) {
+      unauthorizedResponse(res, error);
+    }
+  }
+];
