@@ -90,4 +90,10 @@ User.getUserDetails = (uid) =>
 User.addUser = (uid, password) =>
   User.create({uid: uid, password: password}).then((user) => user);
 
+User.updateUser = (uid, password) =>
+  User.findOneAndUpdate({ uid: uid }, { password: password }, {new: true}).then((user) => user);
+
+User.clearTokens = (uid) =>
+  User.findOneAndUpdate({ uid: uid }, { tokens: [] }, {new: true}).then((user) => user);
+
 module.exports = User;

@@ -8,7 +8,7 @@ const findUser = async (req) => {
   const accessToken = req
     .header(constants.authorizationHeaderName)
     .replace(constants.bearerTokenLabel, "");
-  const { id } = tokens.decodeAccessToken(accessToken);
+  const { id }   = tokens.decodeAccessToken(accessToken);
   return User.findOne({ uid: id, "tokens.accessToken": accessToken });
 };
 

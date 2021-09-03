@@ -48,4 +48,37 @@ module.exports.registerUserController = [
   },
 ];
 
+module.exports.getUserController = [
+  async (req, res) => {
+    try {
+      const user = await User.getUserDetails(req.user.uid);
+      
+      if (user == undefined) {
+        throw createPermissionError("400", "User does not exist");
+      }
+      successResponseWithData(res, user);
+    } catch (error) {
+      unauthorizedResponse(res, error);
+    }
+  }
+];
 
+module.exports.changePasswordController = [
+  async (req, res) => {
+    try {
+      const user = await User.getUserDetails(req.user.uid);
+      if (user == undefined) {
+        throw createPermissionError("400", "User does not exist");
+      }
+      const {  password } = req.body;
+      const res_message = await User.updateUser(req.user.uid, password);
+      if (res_message == undefined) {
+        throw createPermissionError("400", "User could not be updated");
+      }
+      const res_message_2 = await User.clearTokens(req.user.uid);
+      successResponseWithData(res, res_message);
+    } catch (error) {
+      unauthorizedResponse(res, error);
+    }
+  }
+];
